@@ -1,16 +1,22 @@
-import React from 'react'
+import React, {useState} from 'react'
 import './nav.css'
-import {AiOutlineHome} from 'react-icons/ai'
-import {AiOutlineUser} from 'react-icons/ai'
-import {BiBook} from 'react-icons/bi'
-import {BiMessageSquareDetail} from 'react-icons/bi'
-import {useState} from 'react'
+import {AiOutlineHome, AiOutlineUser} from 'react-icons/ai'
+import {BiBook, BiMessageSquareDetail} from 'react-icons/bi'
+import {sections} from '../../sections'
+
+const icons = {
+  AiOutlineHome,
+  AiOutlineUser,
+  BiBook,
+  BiMessageSquareDetail,
+};
 
 const Nav = () => {
   const [activeNav, setActiveNav] = useState('#')
 
   function getProps(scrollDepthTag) {
     return {
+      key: scrollDepthTag,
       href: scrollDepthTag,
       onClick: () => setActiveNav(scrollDepthTag),
       className: activeNav === scrollDepthTag ? "active" : "",
@@ -19,18 +25,14 @@ const Nav = () => {
 
   return (
     <nav>
-      <a {...getProps("#")}>
-        <AiOutlineHome />
-      </a>
-      <a {...getProps("#about")}>
-        <AiOutlineUser />
-      </a>
-      <a {...getProps("#experience")}>
-        <BiBook />
-      </a>
-      <a {...getProps("#contact")}>
-        <BiMessageSquareDetail />
-      </a>
+      {sections.map(({ anchor, component }) => {
+        const IconComponentReference = icons[component];
+        return (
+          <a {...getProps(anchor)}>
+            <IconComponentReference />
+          </a>
+        );
+      })}
     </nav>
   )
 }

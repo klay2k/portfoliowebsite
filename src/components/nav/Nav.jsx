@@ -8,12 +8,29 @@ import {useState} from 'react'
 
 const Nav = () => {
   const [activeNav, setActiveNav] = useState('#')
+
+  function getProps(scrollDepthTag) {
+    return {
+      href: scrollDepthTag,
+      onClick: () => setActiveNav(scrollDepthTag),
+      className: activeNav === scrollDepthTag ? "active" : "",
+    }
+  }
+
   return (
     <nav>
-      <a href="#" onClick ={() => setActiveNav('#')} className={activeNav === '#' ? 'active' : ''}><AiOutlineHome/></a>
-      <a href="#about" onClick ={() => setActiveNav('#about')} className={activeNav === '#about' ? 'active' : ''}><AiOutlineUser/></a>
-      <a href="#experience" onClick ={() => setActiveNav('#experience')} className={activeNav === '#experience' ? 'active' : ''}><BiBook/></a>
-      <a href="#contact" onClick ={() => setActiveNav('#contact')} className={activeNav === '#contact' ? 'active' : ''}><BiMessageSquareDetail/></a>
+      <a {...getProps("#")}>
+        <AiOutlineHome />
+      </a>
+      <a {...getProps("#about")}>
+        <AiOutlineUser />
+      </a>
+      <a {...getProps("#experience")}>
+        <BiBook />
+      </a>
+      <a {...getProps("#contact")}>
+        <BiMessageSquareDetail />
+      </a>
     </nav>
   )
 }

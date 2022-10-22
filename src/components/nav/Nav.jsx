@@ -16,7 +16,7 @@ const Nav = () => {
 
   return (
     <nav>
-      {sections.map(({ anchor, component: IconComponentReference }) => {
+      {sections.map(({ anchor, navIcon: IconComponentReference }) => {
         return (
           <a {...getProps(anchor)}>
             <IconComponentReference />
